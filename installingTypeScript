@@ -1,0 +1,13 @@
+1) install node js
+2) check if node js is installed
+    node -v       <- this provides the installed nodejs version
+3) check if npm is installed
+    npm -v        <- this provides the installed npm version
+4) Configure repository if required
+    npm config set registry <repository URL with port>
+5) install typeScript
+    npm install -g typeScript
+    typeScript get downloaded in the below folder with a folder named typeScript
+    C:\Users\username\AppData\Roaming\npm\node_modules\
+6) Check if typeScript is properly installed
+    tsc -v         <- this provides the installed typeScript version
