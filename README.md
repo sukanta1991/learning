@@ -1,2 +1,2 @@
 # learning
-This are the materials i learnt from different sources
+This are the programs and tips i learnt
