@@ -1,2 +1,2 @@
-# learning
-This are the programs and tips i learnt
+# TypeScript
+This are the programs and tips I learnt
