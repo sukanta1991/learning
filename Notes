@@ -1,0 +1,206 @@
+To compile a typescript file
+    Syntax: tsc fileName.ts
+the default output of this command is fileName.js
+
+************************************************
+Type of datatypes
+    boolean
+    number
+    string
+    any
+    void
+
+    let var1: boolean = true
+    let var2: number = 1919
+
+    let str1: string = "sample string";
+    let str2: string = 'The previous string is ${str1}';
+    let str3 = ' This is an Example
+                of a multi line string
+                this will be displayed in console
+                as multi line';
+For variable declared as void only null and undefined can be the value.
+
+************************************************
+Enum in typescript is used to give friendly names to numbers
+    SYNTAX: enum EnumName{prop1, prop2, prop3};
+    value of the first element will be 0, and the rest will be increment by 1
+Enum to start with a particular value
+    enum EnumName1{prop1=100,prop2, prop3};
+Enum to set all property with different values
+    enum EnumName1{prop1=100,prop2=203, prop3=607};
+
+Get value of enum
+    EnumName.prop1
+    EnumName["prop1"]
+
+************************************************
+Array declaration:---
+    let arr1: string[] = ["str1","str2","str3"];
+    let arr2: Array<string> = = ["str1","str2","str3"];
+To add dynamic data in the Array
+    arr1.push("str4");
+    arr2[3] = "str4";
+To delete elements from array use pop() or splice() operation
+
+************************************************
+Tuple type is a kind of array which accepts more than one predefined type of data.
+Tuples are used to represent collection of different objects.
+    var ccVar: [string, class1, number];
+    ccVar = ["str1", new class1(1,"arg1",125)];
+
+************************************************
+Duck-typing is a rule for checking the type compatibility for complex variable type.
+typescript compiler used the Duck-typing method to compare one object with another, by comparing that both the objects have same properties and data type.
+
+If certain properties need to be made optional, this can be done by adding '?' after the property name.
+    interface IClassInter{
+        pId?:number;
+        pStr:string;
+    }
+
+An Interface can be extended using the 'extends' keyword.
+To implement an interface in a class we use the 'implements' keyword.
+
+************************************************
+Class is a template from which objects can be created, meant for implementing reusable functionality.
+It provides behaviour and state storage.
+'class' keyword is used to create a class.
+
+constructor can be created by a function name 'constructor'.
+Only one per class is allowed. Optional parameters are  allowed in constructor.
+
+TS provides option to add getter setter to control accessing the members outside the class or modify the same.
+
+We can inherit a class using the 'extends' keyword.
+The subclass constructor function defination should invoke the super class constructor using 'super' function.
+'super' keyword can be used to access the method of super class inside the subclass method.
+A superclass method can be overridden inside subclass by specifying the same function signature.
+
+************************************************
+Types of access modifiers in TS are:-
+    public -> default access modifier
+    private -> are accessible within class
+    protected -> are accessible within and inherited class
+
+A static function can access only static variables and static functions
+
+************************************************
+Abstract Class are base class that may not be instantiated.
+it can be created using the 'abstract' keyword.
+It can contain both abstract method and method implementations.
+
+************************************************
+Module and namespace are useful in grouping functionality under common name, mainly used for reuseablity.
+namespace is used for smaller application while module are used for larger application to support modularity,
+
+The function or any construct which is not exported cannot be accessible outside the namespace.
+
+************************************************
+complile typescript with target for ES5
+    tsc --target ES6 file.ts
+
+**error without target 
+    File.ts(6,9): error TS1056: Accessors are only available when targeting ECMAScript 5 and higher.
+    File.ts(10,9): error TS1056: Accessors are only available when targeting ECMAScript 5 and higher.
+
+complile multiple files in one go
+specially modules are advised to compile togather
+    tsc module1.ts module2.ts moduleimport.ts
+
+************************************************
+modules in typescript can be compliled in following supported formates
+AMD - Asynchornous Module Defination
+Commonjs {if no format is mentioned while compile}
+ES2015 - ECMAScript 2015   {Commonly code is compliled in this}
+System
+UMD - Universal Module Defination
+    SYNTAX: tsc fileName.ts --module ES2015
+
+we can have a default export. only one default export is allowed per Module
+    SYNTAX: export default class{}
+
+************************************************
+to import namespace use the /// {triple slash referance tag}
+    SYNTAX: /// <referance path="./namespaceFileName.ts" />
+
+For namespace it prefered to group the output togather into a single file
+We have the option to do that by using the --outFile keyword
+    SYNTAX: tsc --outFile fileName.js namespaceFileName1.ts namespaceFileName2.ts
+
+************************************************
+difference between Module and namespace
+1. namespace doesnot require any special loader, Module require loader. Module support with Node.js modeule loader.
+2. Module supports ES2015 module SYNTAX while ES2015 doesnot have namespace concept. its used to prevent global namespace pollution
+3. Module is suited for large scale application while namespace is for small scale application.
+
+************************************************
+To compile Class Decorator 
+    tsc --experimentalDecorators --target ES5 classDecorator.ts
+
+A Method Decorator is declared just before a method declaration. 
+It is used to observe, modify, or replace a method defination.
+It is invoked at runtime with 3 arguments:
+Target: either the prototype of the class or the constructor
+Key: name of the decorated method
+description: Property descriptor for the method
+Command to complile method Decorator
+    tsc --experimentalDecorators --target ES5 MethodDecorator.ts
+
+************************************************
+typescript compiler option -- This is used to specify configurations like target ES version to be used to compile, module loader to be used.
+compiler options documentation: http://www.typescriptlang.org/docs/handbook/compiler-options.html
+common compiler options
+--module or --m
+--sourceMap
+--target or --t
+--watch or --w
+--outDir
+--outFile
+
+************************************************
+tsconfig.json --> 
+It is used to provide compiler options to a typescript project
+It helps in specifying the files to be included or excluded from the project
+Example: 
+{
+    "compilerOptions":{
+                    "target" : "es5",
+                    "outDir" : "js",
+                    "module" : "amd",
+                    "outFile" : "moduleTest.js"
+    },
+    "files" : [
+        "filename1.ts",
+        "filename2.ts"
+    ]
+
+}
+
+************************************************
+Ambient declarations:---
+it is used to create type defination files for a specific JavaScript library or a JavaScript File
+It is basically used to tell TS that we are trying to describe a code that exist elsewhere and get resolved at runtime
+They are a kind of contact we make with the compiler. If these do not exist at runtime and we try to use them then the execution breaks down.
+** To create Ambient declaration use "declare" keyword.
+We can create ambient module or class or interface or variable.
+
+To use the ambient declaration we use the triple slash referance
+Syntax: ///<referance path="fileName.d.ts"/>
+
+************************************************
+GitHub repo for type Defination files:
+https://github.com/DefinitelyTyped/DefinitelyTyped
+
+To get started with typings ,install globally from npm
+npm install -g typings
+
+Once installed in the machine we can download the type defination files using typings command from the command line
+SYNTAX: typings install source~typedefinationfilename -save --global
+
+downloading jquery type defination file from definitely typed repo
+typings install dt~jquery --global
+
+
+
+
