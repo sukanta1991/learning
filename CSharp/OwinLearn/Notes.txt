@@ -1,0 +1,41 @@
+User Authentication using OWIN local Database
+
+Follow the below steps to create a sample application with OWIN authentication.
+There are two steps in achieving the goal.
+A.)	DataBase 
+    1)	Create a database Learning
+    2)	Create a table login
+    3)	Create a store procedure to authenticate
+    4)	Enter data into the table
+
+B.)	Application
+    1)	Create an empty MVC application. (The scaffolding will add the basic files like routeconfig, Global.asax, MVC folders etc.)
+    2)	To start off with the project we need to add the below NuGet packages :-
+        I)	Owin
+        II)	Microsoft.AspNet.Identity.Owin
+        III)	Microsoft.Owin
+        IV)	Microsoft.Owin.Host.SystemWeb
+        V)	Microsoft.Owin.Security.OAuth
+        VI)	Microsoft.Owin.Security.Cookies
+        VII)	Microsoft.Web.Infrastructure
+
+    3)	Open Global.asax and add the line at last of Application_Start function
+        AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Name;
+
+    **This will require a namespace System.Security.Claims 
+
+    4)	To the main project add class file -> Startup.cs and make changes as per the uploaded file.
+    5)	Under App_Start folder add a file Startup.Auth.cs and make changes as per the uploaded file.
+    6)	Change the RouteConfig.cs file as per uploaded.
+    7)	Create a folder DBContext under the main branch of the project and add a ADO.NET Entity Data Model to it.
+    a.	Give the modelName
+    b.	Then choose EF Designer from Model
+    c.	Choose Database and give the entity a name.(I named learningEntities1)
+    d.	From the database object to include choose the stored procedure
+    8)	Under the Model  folder add a model AccountViewModels.cs file and change as per the file uploaded.
+    9)	Add a controller Home and decorate the Index with Authorize attribute.
+    10)	 Add a view for the index function and change as per the file uploaded.
+    11)	Add a controller Account and change as  per the file uploaded.
+    12)	Add a partial view LogOff.cshtml under the shared folder.
+    13)	Add a view for the Login action(**get method) with the model ‘AccountViewModels’ and make changes as per the file uploaded.
+    14)	Make changes in the Shared\_Layout.cshtml as per the file uploaded.
