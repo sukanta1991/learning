@@ -1,4 +1,5 @@
-#ASP.NET MVC with Angular 2+
+#Angular2MvcNet
+ASP.NET MVC with Angular 2+
 This are steps followed to integrate Angular 2+ with ASP.NET MVC.
 1)	Create a new empty project with MVC and API templete
 2)	Download and extract the angular quick start from GitHub(https://github.com/angular/quickstart)
