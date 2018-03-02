@@ -1,0 +1,42 @@
+<div [hidden]="submitted">
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <div class="text-danger"> {{errMsg}}</div>
+    <table>
+      <tr class="form-group">
+        <td>
+          <label for="name">UserName:</label>
+        </td>
+        <td>
+          <input type="text" class="form-control" required [(ngModel)]="login.userName" name="userName" #userName="ngModel" placeholder="USERNAME"/>
+        </td>
+        <td>
+          <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">UserName is required!</div>
+        </td>
+      </tr> 
+      <tr class="form-group">
+        <td>
+          <label for="password">Password:</label> 
+        </td>
+        <td>
+          <input type="password" class="form-control" required [(ngModel)]="login.password" name="password" #password="ngModel" />
+        </td>
+        <td>
+          <div  [hidden]="password.valid || password.pristine" class="alert alert-danger">Password is required!</div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" align="center">
+          <button type="submit" class="btn btn-default" [disabled] ="!loginForm.form.valid">Log In</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+<div [hidden]="!submitted">
+  Welcome {{login.userName}}
+  <br/>
+<button (click)="onLogOut()">Log Out</button>
+</div>
+<div *ngIf="submitted">
+  <appBook></appBook>
+</div>
