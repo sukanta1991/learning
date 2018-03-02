@@ -1,0 +1,83 @@
+<button class="btn btn-primary" (click)="addUserForm=true">Add Books</button>
+<table class="table table-striped table-bordered" *ngIf="books">
+  <thead class="thead-inverse">
+    <tr >
+      <td>Sl. No.</td>
+      <td>Book Name</td>
+      <td>Book Author</td>
+      <td>Have I read?</td>
+      <td>Take Action</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of books ; let i =index">
+      <td>{{i + 1}}</td>
+      <td>{{book.bookName}}</td>
+      <td>{{book.authors}}</td>
+      <td>{{book.readbook}}</td>
+      <td>
+        <div class="btn-group">
+          <button type="button" class="btn btn-warning" (click)="onUpdate(book.bookId)">Update</button>
+          <button type="button" class="btn btn-warning" (click)="onDelete(book.bookId)">Delete</button>          
+        </div>
+        </td>
+    </tr>
+    <tr>
+      <td colspan="5">
+       
+      </td>
+    </tr>
+  </tbody>
+</table>
+   
+<div *ngIf="addUserForm"  class="floatDiv">
+  <h1>Add Book details</h1>
+  <form [formGroup] ="addBooksForm" class="form-horizontal" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="bookName" class="col-xs-4 control-label" style="text-align:left">Book Name</label>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" formControlName="bookName" />
+        <div *ngIf="addBooksForm.controls.bookName.errors" class="alert alert-danger">Name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="authors" class="col-xs-4 control-label" style="text-align:left">Author Name</label>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" formControlName="authors" />
+        <div *ngIf="addBooksForm.controls.authors.errors" class="alert alert-danger">Author name is required</div>
+        </div>
+      </div>
+    <button class="btn btn-default"  type="submit" [disabled]="!addBooksForm.valid">Add Details</button>
+    <button class="btn btn-default" (click)="addUserForm=false">Cancel</button>
+  </form>
+</div>
+<div *ngIf="updateFormBook" class="floatDiv">
+  <h1>Update Book details</h1>
+  <form [formGroup]="addBooksForm" class="form-horizontal" (ngSubmit)="updateRecord(bookToUpdate.bookId)">
+    <div class="form-group">
+      <label for="bookName" class="col-xs-4 control-label" style="text-align:left">Book Name</label>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" formControlName="bookName" [attr.disabled]="''" />
+        <div *ngIf="addBooksForm.controls.bookName.errors" class="alert alert-danger">Name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="authors" class="col-xs-4 control-label" style="text-align:left">Author Name</label>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" formControlName="authors" [attr.disabled]="''"/>
+        <div *ngIf="addBooksForm.controls.authors.errors" class="alert alert-danger">Author name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="authors" class="col-xs-4 control-label" style="text-align:left">Book Read</label>
+      <div class="col-xs-8">
+        <select formControlName="readBook">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn btn-default" type="submit" [disabled]="!addBooksForm.valid" >Update Details</button>
+    <button class="btn btn-default" (click)="updateFormBook=false">Cancel</button>
+  </form>
+</div>
