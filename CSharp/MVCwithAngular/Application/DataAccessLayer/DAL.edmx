@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DALModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="books">
+          <Key>
+            <PropertyRef Name="bookId" />
+          </Key>
+          <Property Name="bookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bookName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="authors" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="readbook" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="skills">
+          <Key>
+            <PropertyRef Name="skillId" />
+          </Key>
+          <Property Name="skillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="skills" Type="varchar" MaxLength="50" />
+          <Property Name="trained" Type="bit" />
+          <Property Name="userId" Type="int" />
+        </EntityType>
+        <EntityType Name="userDetails">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="varchar" MaxLength="50" />
+          <Property Name="AccessAllowed" Type="bit" />
+        </EntityType>
+        <Association Name="FK__skills__userId__0CBAE877">
+          <End Role="userDetails" Type="Self.userDetails" Multiplicity="0..1" />
+          <End Role="skills" Type="Self.skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userDetails">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="skills">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="LoginByUsernamePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ufn_getSkills" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userName" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="userName" Type="varchar" MaxLength="50" />
+                <Property Name="Skills" Type="varchar" MaxLength="50" />
+                <Property Name="trained" Type="varchar" MaxLength="5" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="ufn_hasAccess" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="user" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_deleteSkills" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="skills" Type="varchar" Mode="In" />
+          <Parameter Name="userName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_getAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_insertSkills" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="skills" Type="varchar" Mode="In" />
+          <Parameter Name="trained" Type="varchar" Mode="In" />
+          <Parameter Name="userName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_updateSkills" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="skills" Type="varchar" Mode="In" />
+          <Parameter Name="trained" Type="varchar" Mode="In" />
+          <Parameter Name="userName" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="DALModelStoreContainer">
+          <EntitySet Name="books" EntityType="Self.books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="skills" EntityType="Self.skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userDetails" EntityType="Self.userDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__skills__userId__0CBAE877" Association="Self.FK__skills__userId__0CBAE877">
+            <End Role="userDetails" EntitySet="userDetails" />
+            <End Role="skills" EntitySet="skills" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DALModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="ufn_getSkills_Result">
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Skills" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="trained" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <EntityType Name="book">
+          <Key>
+            <PropertyRef Name="bookId" />
+          </Key>
+          <Property Name="bookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bookName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="authors" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="readbook" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="skill">
+          <Key>
+            <PropertyRef Name="skillId" />
+          </Key>
+          <Property Name="skillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="skills" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="trained" Type="Boolean" />
+          <Property Name="userId" Type="Int32" />
+          <NavigationProperty Name="userDetail" Relationship="Self.FK__skills__userId__0CBAE877" FromRole="skills" ToRole="userDetails" />
+        </EntityType>
+        <EntityType Name="userDetail">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccessAllowed" Type="Boolean" />
+          <NavigationProperty Name="skills" Relationship="Self.FK__skills__userId__0CBAE877" FromRole="userDetails" ToRole="skills" />
+        </EntityType>
+        <Association Name="FK__skills__userId__0CBAE877">
+          <End Role="userDetails" Type="Self.userDetail" Multiplicity="0..1" />
+          <End Role="skills" Type="Self.skill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userDetails">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="skills">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DALEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="books" EntityType="Self.book" />
+          <EntitySet Name="Logins" EntityType="Self.Login" />
+          <EntitySet Name="skills" EntityType="Self.skill" />
+          <EntitySet Name="userDetails" EntityType="Self.userDetail" />
+          <AssociationSet Name="FK__skills__userId__0CBAE877" Association="Self.FK__skills__userId__0CBAE877">
+            <End Role="userDetails" EntitySet="userDetails" />
+            <End Role="skills" EntitySet="skills" />
+          </AssociationSet>
+          <FunctionImport Name="ufn_getSkills" IsComposable="true" ReturnType="Collection(DALModel.ufn_getSkills_Result)">
+          <Parameter Name="userName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LoginByUsernamePassword" ReturnType="Collection(DALModel.LoginByUsernamePassword_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_deleteSkills">
+            <Parameter Name="skills" Mode="In" Type="String" />
+            <Parameter Name="userName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_insertSkills">
+            <Parameter Name="skills" Mode="In" Type="String" />
+            <Parameter Name="trained" Mode="In" Type="String" />
+            <Parameter Name="userName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_updateSkills">
+            <Parameter Name="skills" Mode="In" Type="String" />
+            <Parameter Name="trained" Mode="In" Type="String" />
+            <Parameter Name="userName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_getAll">
+            <ReturnType EntitySet="books" Type="Collection(DALModel.book)"> </ReturnType>
+            <ReturnType EntitySet="skills" Type="Collection(DALModel.skill)"> </ReturnType>
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="LoginByUsernamePassword_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="usp_getAll_Result">
+          <Property Type="Int32" Name="bookId" Nullable="false" />
+          <Property Type="String" Name="bookName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="authors" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="readbook" Nullable="true" MaxLength="10" />
+		   <Property Name="skillId" Type="Int32" Nullable="false" />
+          <Property Name="skills" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="trained" Type="Boolean" />
+          <Property Name="userId" Type="Int32" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DALModelStoreContainer" CdmEntityContainer="DALEntities">
+          <EntitySetMapping Name="books">
+            <EntityTypeMapping TypeName="DALModel.book">
+              <MappingFragment StoreEntitySet="books">
+                <ScalarProperty Name="bookId" ColumnName="bookId" />
+                <ScalarProperty Name="bookName" ColumnName="bookName" />
+                <ScalarProperty Name="authors" ColumnName="authors" />
+                <ScalarProperty Name="readbook" ColumnName="readbook" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="DALModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="skills">
+            <EntityTypeMapping TypeName="DALModel.skill">
+              <MappingFragment StoreEntitySet="skills">
+                <ScalarProperty Name="skillId" ColumnName="skillId" />
+                <ScalarProperty Name="skills" ColumnName="skills" />
+                <ScalarProperty Name="trained" ColumnName="trained" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userDetails">
+            <EntityTypeMapping TypeName="DALModel.userDetail">
+              <MappingFragment StoreEntitySet="userDetails">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="AccessAllowed" ColumnName="AccessAllowed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="DALModel.Store.ufn_getSkills" FunctionImportName="ufn_getSkills">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DALModel.ufn_getSkills_Result">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="Skills" ColumnName="Skills" />
+                <ScalarProperty Name="trained" ColumnName="trained" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LoginByUsernamePassword" FunctionName="DALModel.Store.LoginByUsernamePassword">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DALModel.LoginByUsernamePassword_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_deleteSkills" FunctionName="DALModel.Store.usp_deleteSkills" />
+          <FunctionImportMapping FunctionImportName="usp_insertSkills" FunctionName="DALModel.Store.usp_insertSkills" />
+          <FunctionImportMapping FunctionImportName="usp_updateSkills" FunctionName="DALModel.Store.usp_updateSkills" />
+          <FunctionImportMapping FunctionImportName="usp_getAll" FunctionName="DALModel.Store.usp_getAll">
+            <ResultMapping>
+              <EntityTypeMapping  TypeName="DALModel.book">
+                <ScalarProperty Name="bookId" ColumnName="bookId" />
+                <ScalarProperty Name="bookName" ColumnName="bookName" />
+                <ScalarProperty Name="authors" ColumnName="authors" />
+                <ScalarProperty Name="readbook" ColumnName="readbook" />
+              </EntityTypeMapping >
+            </ResultMapping>
+            <ResultMapping>
+              <EntityTypeMapping  TypeName="DALModel.skill">
+                <ScalarProperty Name="skillId" ColumnName="skillId" />
+                <ScalarProperty Name="skills" ColumnName="skills" />
+                <ScalarProperty Name="trained" ColumnName="trained" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </EntityTypeMapping >
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
