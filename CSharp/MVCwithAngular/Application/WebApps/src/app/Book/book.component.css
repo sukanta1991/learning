@@ -1,0 +1,12 @@
+.floatDiv {
+  position: absolute;
+  top: 22%;
+  left: 12%;
+  margin-top: -50px;
+  width: 77%;
+  height: 400px;
+  overflow-y: auto;
+  background-color: white;
+  border: solid;
+  border-color: black;
+}
