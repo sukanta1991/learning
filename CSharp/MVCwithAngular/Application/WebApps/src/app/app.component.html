@@ -1,0 +1,15 @@
+
+<div class="navbar navbar-inverse">
+  <div class="container-fluid collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+
+      <li><a [routerLink]='["/home",username]' routerLinkActive="active">Home</a></li>
+      <li><a [routerLink]='["/book",username]' routerLinkActive="active">Books</a></li>
+      <li><a [routerLink]='["/skill",username]' routerLinkActive="active">Skills</a></li>
+      <li><a [routerLink]='["/about",username]' routerLinkActive="active">About Us</a></li>
+      <li><a [routerLink]='["/contact",username]' routerLinkActive="active">Contact Us</a></li>
+    </ul>
+  </div>  
+</div>
+<router-outlet></router-outlet>
+
