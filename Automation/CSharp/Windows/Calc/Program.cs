@@ -34,7 +34,7 @@ namespace TestUIAuto
         public  void Calculator()
         {
             var _calculatorProcess = Process.Start("Calc.exe");
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
 
             int ct = 0;
             do
@@ -62,32 +62,69 @@ namespace TestUIAuto
             {
                 throw new InvalidOperationException("Could not find result box");
             }
+            GetInvokePattern(GetFunctionButtonbyAID("num1Button")).Invoke();
+            GetInvokePattern(GetFunctionButtonbyAID("plusButton")).Invoke();
+            GetInvokePattern(GetFunctionButtonbyAID("num2Button")).Invoke();
+            GetInvokePattern(GetFunctionButtonbyAID("equalButton")).Invoke();
+            //This code is to clear the result screen
+            //GetInvokePattern(GetFunctionButton(Functions.Clear)).Invoke();
+
+
+            /*
+           * This approach has many repeatative code
             var _control1 = _calculatorAutomationElement.FindFirst
             (TreeScope.Descendants, new PropertyCondition
             (AutomationElement.AutomationIdProperty, "num1Button"));
             InvokePattern num1 = (InvokePattern)_control1.GetCurrentPattern(InvokePattern.Pattern);
-            num1.Invoke(); 
-             var _controlPlus = _calculatorAutomationElement.FindFirst
-            (TreeScope.Descendants, new PropertyCondition
-            (AutomationElement.AutomationIdProperty, "plusButton"));
-            InvokePattern numPlus = (InvokePattern)_controlPlus.GetCurrentPattern(InvokePattern.Pattern);
-            numPlus.Invoke();
-            var _control2 = _calculatorAutomationElement.FindFirst
-            (TreeScope.Descendants, new PropertyCondition
-            (AutomationElement.AutomationIdProperty, "num2Button"));
-            InvokePattern num2 = (InvokePattern)_control2.GetCurrentPattern(InvokePattern.Pattern);
-            num2.Invoke();
+            num1.Invoke();
+            */
+
+            /*
+           * This approach has many repeatative code
+            var _controlPlus = _calculatorAutomationElement.FindFirst
+           (TreeScope.Descendants, new PropertyCondition
+           (AutomationElement.AutomationIdProperty, "plusButton"));
+           InvokePattern numPlus = (InvokePattern)_controlPlus.GetCurrentPattern(InvokePattern.Pattern);
+           numPlus.Invoke();
+           */
+
+            /*
+            * This approach has many repeatative code
+           var _control2 = _calculatorAutomationElement.FindFirst
+           (TreeScope.Descendants, new PropertyCondition
+           (AutomationElement.AutomationIdProperty, "num2Button"));
+           InvokePattern num2 = (InvokePattern)_control2.GetCurrentPattern(InvokePattern.Pattern);
+           num2.Invoke();
+           */
+
+            /*
+             * This approach has many repeatative code
             var _controlEql = _calculatorAutomationElement.FindFirst
             (TreeScope.Descendants, new PropertyCondition
             (AutomationElement.AutomationIdProperty, "equalButton"));
             InvokePattern numEql = (InvokePattern)_controlEql.GetCurrentPattern(InvokePattern.Pattern);
-            numEql.Invoke();
+            numEql.Invoke();*/
 
-            //GetInvokePattern(GetFunctionButton(Functions.Clear)).Invoke();
+
+
         }
         public InvokePattern GetInvokePattern(AutomationElement element)
         {
             return element.GetCurrentPattern(InvokePattern.Pattern) as InvokePattern;
+        }
+        public AutomationElement GetFunctionButtonbyAID(string functionName)
+        {
+            AutomationElement functionButton = _calculatorAutomationElement.FindFirst
+            (TreeScope.Descendants, new PropertyCondition
+            (AutomationElement.AutomationIdProperty, functionName));
+
+            if (functionButton == null)
+            {
+                throw new InvalidOperationException("No function button found with name: " +
+                functionName);
+            }
+
+            return functionButton;
         }
         public AutomationElement GetFunctionButton(string functionName)
         {
