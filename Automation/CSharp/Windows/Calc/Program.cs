@@ -77,36 +77,25 @@ namespace TestUIAuto
             (AutomationElement.AutomationIdProperty, "num1Button"));
             InvokePattern num1 = (InvokePattern)_control1.GetCurrentPattern(InvokePattern.Pattern);
             num1.Invoke();
-            */
-
-            /*
-           * This approach has many repeatative code
+           
             var _controlPlus = _calculatorAutomationElement.FindFirst
            (TreeScope.Descendants, new PropertyCondition
            (AutomationElement.AutomationIdProperty, "plusButton"));
            InvokePattern numPlus = (InvokePattern)_controlPlus.GetCurrentPattern(InvokePattern.Pattern);
            numPlus.Invoke();
-           */
-
-            /*
-            * This approach has many repeatative code
+           
            var _control2 = _calculatorAutomationElement.FindFirst
            (TreeScope.Descendants, new PropertyCondition
            (AutomationElement.AutomationIdProperty, "num2Button"));
            InvokePattern num2 = (InvokePattern)_control2.GetCurrentPattern(InvokePattern.Pattern);
            num2.Invoke();
-           */
-
-            /*
-             * This approach has many repeatative code
+           
             var _controlEql = _calculatorAutomationElement.FindFirst
             (TreeScope.Descendants, new PropertyCondition
             (AutomationElement.AutomationIdProperty, "equalButton"));
             InvokePattern numEql = (InvokePattern)_controlEql.GetCurrentPattern(InvokePattern.Pattern);
-            numEql.Invoke();*/
-
-
-
+            numEql.Invoke();
+            */            
         }
         public InvokePattern GetInvokePattern(AutomationElement element)
         {
