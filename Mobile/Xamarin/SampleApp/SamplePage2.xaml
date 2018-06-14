@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="testApp.SamplePage2">
+    <StackLayout Orientation="Vertical">
+       
+       
+
+        
+        
+        <Button Text="Previous Page" Clicked="Button_Clicked" />
+        <Button x:Name="ThirdPage" Text="Third Page" Clicked="ThirdPage_Clicked"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0"
+                  BackgroundColor="Maroon"
+                  HeightRequest="500"
+                  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                <Label Text="Title of the task" />
+                </Grid>
+                <Grid Grid.Row="1">
+                <Label Text="Duration of the task" />
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1"
+                  BackgroundColor="Teal" 
+                   HeightRequest="500">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Entry Text="{Binding TaskModel.TaskName}" />
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Entry Text="{Binding TaskModel.Duration}"/>
+                </Grid>
+            </Grid>
+
+
+
+
+        </Grid>
+    </StackLayout>
+</ContentPage>
