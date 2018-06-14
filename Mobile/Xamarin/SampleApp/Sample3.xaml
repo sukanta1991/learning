@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="testApp.Sample3">
+    <StackLayout Orientation="Vertical">
+        <Button x:Name="btnAnimate" Text="Start Animation"
+                Font="Large" 
+                Clicked="btnAnimate_Clicked"/>
+        <Button x:Name="btnNxtPage" Text="Go to Forth page" Font="Large" Clicked="btnNxtPage_Clicked" />
+        <Grid x:Name="MainGrid"
+              BackgroundColor="Purple"
+              WidthRequest="50"
+              HeightRequest="150"
+              HorizontalOptions="Start">
+            <Label x:Name="lblText" Text="CLick here" TextColor="White"/>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer x:Name="tapGrid" Tapped="tapGrid_Tapped" NumberOfTapsRequired="2" />
+
+
+
+            </Grid.GestureRecognizers>
+
+
+
+        </Grid>
+            
+    </StackLayout>
+</ContentPage>
