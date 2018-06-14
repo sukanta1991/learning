@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:testGst"
+             x:Class="testGst.MainPage"
+             Title="GST Calculator">
+    <StackLayout>
+        <ScrollView Orientation="Vertical">
+            <Grid x:Name="controlGrid" RowSpacing="1" ColumnSpacing="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+           
+            <Label Grid.Row="0" Grid.Column="0" Text="Enter MRP" />
+            <Entry Grid.Row="0" Grid.Column="1" x:Name="txtAmt" />
+            <Label Grid.Row="1" Grid.Column="0" Text="Enter  Number of Item"/>
+            <Entry Grid.Row="1" Grid.Column="1" x:Name="txtNum" Text="1" />
+            <Label Grid.Row="2" Grid.Column="0" Text="Enter  GST %"/>
+            <Entry Grid.Row="2" Grid.Column="1" x:Name="txtGST"/>
+            <Button Grid.Row="4" Grid.Column="0" x:Name="btnClear" Clicked="btnClear_Clicked" TextColor="Black" Text="Clear"/>
+            <Button Grid.Row="4" Grid.Column="1" x:Name="btnCalculate" Clicked="btnCalculate_Clicked" TextColor="Black" Text="Calculate"/>
+            <Label Grid.Row="5" Grid.Column="0" Text="Taxable Amount:" />
+            <Label Grid.Row="6" Grid.Column="0" Text="CGST:" />
+            <Label Grid.Row="7" Grid.Column="0" Text="SGST/UTGST:" />
+            <Label Grid.Row="8" Grid.Column="0" Text="Total GST:" />
+            <Label Grid.Row="9" Grid.Column="0" Text="Total:" />
+            <Label Grid.Row="5" Grid.Column="1" Text="" x:Name="lblAmt" TextColor="Black"/>
+            <Label Grid.Row="6" Grid.Column="1" Text="" x:Name="lblCgst" TextColor="Black"/>
+            <Label Grid.Row="7" Grid.Column="1" Text="" x:Name="lblSgst" TextColor="Black"/>
+            <Label Grid.Row="8" Grid.Column="1" Text="" x:Name="lblTgst" TextColor="Black"/>
+            <Label Grid.Row="9" Grid.Column="1" Text="" x:Name="lblTotal" TextColor="Black"/>
+            <Label Grid.Row="3" Grid.ColumnSpan="2" Text="" x:Name="lblErr" TextColor="Red"/>
+                <Label Grid.Row="12" Grid.ColumnSpan="2" TextColor="Black" Text="Copyrights-@Sukanta Saha"/>
+            </Grid>
+           
+        </ScrollView>
+    </StackLayout>
+</ContentPage>
