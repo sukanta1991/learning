@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="testApp.SecondPage"
+             Title="Second Page">
+    <ContentPage.Resources>
+        
+        <ResourceDictionary>
+            
+            <Style x:Key="CustomLabelStyle" 
+                   TargetType="Label">
+                <Setter Property="TextColor" Value="Green"/>
+                <Setter Property="FontSize" Value="50"/>
+
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+  
+    <StackLayout>
+        <Button x:Name="btnPageChange" 
+                Text="Go to Home Page"
+                Clicked="btnPageChange_Clicked"/>
+        <Label x:Name="lblName"/>
+
+        <!--<ListView x:Name="listNames" BackgroundColor="Navy" />-->
+        <ListView x:Name="listNames" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" >
+                            <Label Text="{Binding Name}" Style="{StaticResource CustomLabelStyle}"/>
+                            <Label Text="{Binding Age}"  Style="{StaticResource CustomLabelStyle}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
