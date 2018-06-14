@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="testApp.Sample4"
+             xmlns:ui ="clr-namespace:testApp.UI">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ui:MyDataTemplateSelector x:Key ="MyDataSelector" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ListView x:Name="lstNames" HasUnevenRows="True"
+              Header="" Footer=""
+              ItemTemplate="{StaticResource MyDataSelector}"
+              >
+        <ListView.HeaderTemplate>
+            <DataTemplate>
+                <Grid Padding="12" BackgroundColor="Blue" >
+                    <Label Text="Header Text" TextColor="White"
+
+                           FontSize="34"/>
+                </Grid>
+            </DataTemplate>
+        </ListView.HeaderTemplate>
+        <!--<ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid Padding="12">
+                        <Label Text="{Binding .}" FontSize="30" />
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>-->
+
+        <ListView.FooterTemplate>
+            <DataTemplate>
+                <Grid Padding="12" BackgroundColor="Purple">
+                    <Label Text="Footer text" TextColor="White" FontSize="34" />
+                </Grid>
+            </DataTemplate>
+        </ListView.FooterTemplate>
+        
+    </ListView>
+</ContentPage>
