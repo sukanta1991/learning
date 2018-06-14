@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="testApp.TestLp"
+             Title="test Link">
+    <ContentPage.Content>
+    <StackLayout>
+        <StackLayout>
+                <WebView x:Name="Browser"  HeightRequest="500" WidthRequest="1000"/>
+        </StackLayout>
+        <Label Text="test Web" />
+    </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
