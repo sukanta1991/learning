@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="testApp.HomePage" BackgroundColor="Navy"
+             Title="Home Page">
+    <StackLayout BackgroundColor="White" VerticalOptions="Center" Padding="30,60,30,20">
+        <Entry x:Name="txtName" BackgroundColor="Gray" ></Entry>
+        <Button x:Name="btnName" Clicked="btnName_Clicked" 
+                Text="Say Hello"
+                BackgroundColor="Green" TextColor="Silver"
+                />
+        <Label x:Name="lblName" TextColor="Gray"/>
+        <Button x:Name="btnSecond" Text="Go to second page"
+                Clicked="btnSecond_Clicked" />
+
+    </StackLayout>
+</ContentPage>
