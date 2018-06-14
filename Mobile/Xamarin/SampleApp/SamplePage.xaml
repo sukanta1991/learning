@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="testApp.SamplePage"
+             Title="Sample page"
+             xmlns:converters="clr-namespace:testApp.Converters">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <converters:TextToColorConverter x:Key ="TextToColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="old" Priority="0" Order="Primary" Clicked="ToolbarItem_Clicked"/>
+        <ToolbarItem Text="New"
+                     Priority="0"
+                     Order="Secondary"
+                     Clicked="ToolbarItem_Clicked"
+                     ></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical">
+        <StackLayout Orientation="Vertical" HeightRequest="1000">
+            <Label x:Name="lblTool" />
+
+            <SearchBar x:Name="MainSearchBar" TextChanged="MainSearchBar_SearchButtonPressed" />
+            <ListView x:Name="MainList" />
+
+            <Label Text="Title of the task" />
+                <Entry Text="{Binding TaskModel.TaskName ,Mode=TwoWay}" />
+       
+                    <Label Text="Duration of the task" />
+                <Entry Text="{Binding TaskModel.Duration, Mode=TwoWay}"/>
+                <Button Text="Save" Command="{Binding saveMessage}" />
+                <Label Text="{Binding Message}"
+                       TextColor="{Binding Message, Converter={StaticResource TextToColorConverter}}"/>
+                <Button Text="Go to the test Page" Clicked="Button_Clicked"/>
+                <Entry Placeholder="Name" />
+                <Button Text="Saved" Clicked="ButtonSave_Clicked" />
+                <Label x:Name="testing" Text="Initials"/>
+                <Slider x:Name="MainSlider" Maximum="100" Minimum="0"  /> <!--ValueChanged="MainSlider_ValueChanged"/>-->
+                <Label x:Name="SliderText" FontSize="Large"
+                       Text="{Binding Value, Source={x:Reference MainSlider}}"
+                       />
+                <DatePicker x:Name="datePick" MinimumDate="06/01/2017" MaximumDate="12/31/2017" />
+                <!--DateSelected="datePick_DateSelected"/>-->
+                <Label x:Name="DateTexta" FontSize="Large"   Text="{Binding  Date, Source={x:Reference datePick}}"
+                       />
+                <Switch x:Name="switchShow" HorizontalOptions="Center" Toggled="switchShow_Toggled" />
+                <Label x:Name="switchStaus" FontSize="Large" />
+            <ProgressBar x:Name="progressShow" 
+                         Progress="0.1"
+                         WidthRequest="300"
+                         HeightRequest="20"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center" />
+            <Label x:Name="progText" 
+                   Text="{Binding Progress, Source={x:Reference progressShow}}" 
+                   FontSize="Large" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
