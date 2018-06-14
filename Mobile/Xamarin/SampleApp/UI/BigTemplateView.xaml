@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="testApp.UI.BigTemplateView">
+
+    <Grid BackgroundColor="Maroon"
+          Padding="12,20" >
+
+        <Label Text="{Binding .}" 
+               TextColor="White"
+               FontSize="36"
+               HorizontalOptions="Start"/>
+
+    </Grid>
+</ViewCell>
