@@ -1,0 +1,27 @@
+djN <- read.csv("DJvsNifty.csv")
+#set.seed(502)
+s3d <- scatterplot3d(djN[,c("DJOpen","YR","NOpen")],type='h',color="blue",angle=55,pch=16)
+#mock <- lm(NOpen ~ DJOpen + YR + Mon,data = djN)
+mock <- lm(NOpen ~ DJOpen + DT+ ASOpen+USOpen,data = djN)
+#mocks <- lm(NOpen ~ DJOpen,data = djN)
+s3d$plane3d(mock,plane="solid")
+
+sam<- sample(1:nrow(djN),floor(0.85*nrow(djN)))
+train <- djN[sam,]
+test <- djN[-sam,]
+open <- lm(NOpen ~ DJOpen + DT  + USOpen, data=train)
+summary(open)
+high <- lm(NHigh ~ DJHigh + DT + ASHigh + USHigh, data=train)
+low <- lm(NLow ~ DJLow + DT + ASLow + USLow, data=train)
+close <- lm(NOpen ~ DJOpen + DT + ASOpen + USOpen, data=train)
+pOpen <- predict(open,test)
+pHigh <- predict(high,test)
+pLow <- predict(low,test)
+pClose <- predict(close,test)
+outs <- cbind(pOpen,pHigh,pLow,pClose)
+write.csv(outs,"testIcicRel.csv")
+head(outs)
+summary(open)
+head(mtcars,1)
+mean(mtcars$mpg)
+
